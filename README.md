@@ -19,7 +19,7 @@ The default council:
 |---|---|---|---|
 | `claude` | Claude Fable 5.2 | Anthropic | `ANTHROPIC_API_KEY` |
 | `gpt` | GPT-6.2 Astra | OpenAI | `OPENAI_API_KEY` |
-| `gemini` | Gemini 4 Carbon | Google | `GEMINI_API_KEY` |
+| `gemini` | Gemini 4 Neon | Google | `GEMINI_API_KEY` |
 | `kimi` | Kimi K3.1 Pro | Ollama cloud, then Fireworks | `OLLAMA_API_KEY` or `FIREWORKS_API_KEY` |
 
 You do not need every key. A member whose key is missing is left out, so two keys give you a two-member council.

@@ -69,13 +69,12 @@ export const MEMBERS: Member[] = [
 	},
 	{
 		id: 'gemini',
-		name: 'Gemini 4 Carbon',
+		name: 'Gemini 4 Neon',
 		routes: [
 			{
 				provider: 'google',
-				model: 'gemini-4-carbon',
-				price: { input: 2, cachedInput: 0.1, output: 10 },
-				priceChanges: [{ from: '2026-12-01', input: 4, cachedInput: 0.2, output: 20 }]
+				model: 'gemini-4-neon',
+				price: { input: 3, cachedInput: 0.15, output: 15 }
 			}
 		]
 	},
