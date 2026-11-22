@@ -1,0 +1,32 @@
+# council-mcp — MCP server that puts a question to a council of frontier models.
+#
+# Secrets (set once with `echo "value" | npx wrangler secret put NAME`):
+#   MCP_AUTH_TOKEN (required), ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY,
+#   OLLAMA_API_KEY, FIREWORKS_API_KEY
+# Local dev reads the same names from .dev.vars (gitignored).
+#
+# No account id here: wrangler uses the account you are logged in to, or the
+# CLOUDFLARE_ACCOUNT_ID environment variable.
+
+name = "council-mcp"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+[observability.logs]
+enabled = true
+
+[durable_objects]
+bindings = [
+  { name = "COUNCIL_SESSION", class_name = "CouncilSession" }
+]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["CouncilSession"]
+
+# The cost and error record. No database_id: wrangler creates the database on
+# the first deploy.
+[[d1_databases]]
+binding = "DB"
+database_name = "council"

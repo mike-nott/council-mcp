@@ -1,0 +1,28 @@
+{
+	"name": "council-mcp",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"description": "MCP server on Cloudflare Workers that puts a question to a council of frontier models and returns every answer",
+	"license": "MIT",
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run",
+		"costs": "wrangler d1 execute council --remote --command \"SELECT date(ts/1000,'unixepoch') AS day, member, COUNT(*) AS calls, SUM(tokens_in) AS tokens_in, SUM(tokens_out) AS tokens_out, ROUND(SUM(cost),4) AS cost_usd, SUM(1-ok) AS errors FROM calls GROUP BY day, member ORDER BY day DESC, member\"",
+		"errors": "wrangler d1 execute council --remote --command \"SELECT datetime(ts/1000,'unixepoch') AS time, member, provider, model, error FROM calls WHERE ok = 0 ORDER BY ts DESC LIMIT 50\""
+	},
+	"dependencies": {
+		"@ai-sdk/anthropic": "^4.0.107",
+		"@ai-sdk/google": "^4.0.124",
+		"@ai-sdk/openai": "^4.0.122",
+		"ai": "^7.0.179"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^5.20261121.1",
+		"typescript": "^7.0.2",
+		"vitest": "^5.1.1",
+		"wrangler": "^4.166.0"
+	}
+}
